@@ -50,10 +50,10 @@ fun Question(viewModel: QuestionsViewModel) {
     if (viewModel.data.value.loading == true) {
         CircularProgressIndicator()
     } else {
-        Log.d("Loading", "Question: Loaded")
-        question?.forEach {
-            Log.d("Question", "Question: ${it.question}")
-        }
+
+       if (question != null){
+           QuestionDisplay(question.first())
+       }
     }
 }
 
@@ -61,9 +61,9 @@ fun Question(viewModel: QuestionsViewModel) {
 @Composable
 fun QuestionDisplay(
     question: QuestionItem,
-    questionIndex: MutableState<Int>,
-    viewModel: QuestionsViewModel,
-    onNextClicked: (Int) -> Unit
+   // questionIndex: MutableState<Int>,
+  //  viewModel: QuestionsViewModel,
+    onNextClicked: (Int) -> Unit ={}
 
 ) {
 
@@ -89,9 +89,8 @@ fun QuestionDisplay(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
-            .padding(4.dp),
-        color = AppColors.RaisinBlack
+            .fillMaxHeight(),
+        color = AppColors.RaisinBlack,
     ) {
         Column(
             modifier = Modifier.padding(12.dp),
@@ -103,14 +102,14 @@ fun QuestionDisplay(
 
             Column {
                 Text(
-                    "Question 1?",
+                    "${question.question}?",
                     modifier = Modifier
                         .align(alignment = Alignment.Start)
                         .fillMaxHeight(0.3f)
-                        .padding(16.dp),
-                    fontSize = 17.sp,
+                        .padding(vertical =20.dp),
+                    fontSize = 20.sp,
                     color = AppColors.PowderBlue,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.SemiBold,
                     lineHeight = 22.sp
                 )
                 //Choices
