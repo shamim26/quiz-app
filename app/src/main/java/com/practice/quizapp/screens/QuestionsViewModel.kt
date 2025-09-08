@@ -36,4 +36,7 @@ class QuestionsViewModel
                 }
             }
         }
+        fun getTotalQuestionCount(): Int {
+            return data.value.data?.toMutableList()?.size!!
+        }
     }
